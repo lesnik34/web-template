@@ -1,27 +1,36 @@
 {
-  "name": "web-template",
+  "name": "next-landing",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start:dev": "cross-env ENV_MODE=development next dev --turbopack",
+    "start:prod": "cross-env ENV_MODE=production next start",
+    "start:db": "./server/pocketbase serve",
+    "build:dev": "cross-env ENV_MODE=development next build",
+    "build:prod": "cross-env ENV_MODE=production next build",
+    "start:server": "node server.js",
+    "postbuild": "next-sitemap",
+    "nginx:start": "./nginx/nginx -p ./nginx",
+    "nginx:stop": "./nginx/nginx -p ./nginx -s stop",
+    "nginx:check": "cat ./nginx/logs/nginx.pid"
   },
   "dependencies": {
+    "axios": "^1.7.9",
+    "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.1.6"
+    "react-yandex-metrika": "^2.6.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
-    "@eslint/eslintrc": "^3"
+    "next-sitemap": "^4.2.3",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
